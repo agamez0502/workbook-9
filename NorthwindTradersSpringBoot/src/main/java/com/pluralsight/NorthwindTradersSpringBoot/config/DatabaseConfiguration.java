@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 // It defines a Bean for our DataSource — the object used to connect to the database.
 
 @Configuration
-public class DatabaseConfig {
+public class DatabaseConfiguration {
 
     // We will build the BasicDataSource and store it here.
     private BasicDataSource basicDataSource;
@@ -25,7 +25,7 @@ public class DatabaseConfig {
 
     // Constructor — Spring will call this and inject the datasource.url property here.
     // We will also manually read username/password from System properties — as you wanted — just like Workbook 8 style.
-    public DatabaseConfig(@Value("${datasource.url}") String url) {
+    public DatabaseConfiguration(@Value("${datasource.url}") String url) {
 
         // Read username and password from system properties — these were passed as command-line args.
         String username = System.getProperty("dbUsername");

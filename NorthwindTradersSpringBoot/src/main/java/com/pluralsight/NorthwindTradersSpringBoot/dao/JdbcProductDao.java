@@ -6,9 +6,8 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -28,36 +27,57 @@ public class JdbcProductDao implements ProductDao {
     @Override
     public void add(Product product) {
         // This is the SQL INSERT statement we will run.
-        // We are inserting the id, name, and price
-        String sql = "INSERT INTO product (ProductID, ProductName, UnitPrice) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO products (ProductName, CategoryID, UnitPrice) VALUES (?, ?, ?)";
 
         // This is a "try-with-resources" block.
         // It ensures that the Connection and PreparedStatement are closed automatically after we are done.
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Set the first parameter (?) to the productID.
-            stmt.setInt(1, product.getProductId());
-
-            // Set the second parameter (?) to the product's name.
-            stmt.setString(2, product.getName());
-
-            // Set the third parameter (?) to the unit price.
-            stmt.setInt(3, product.getPrice();
+            stmt.setString(1, product.getName());
+            stmt.setInt(2, product.getCategoryId());
+            stmt.setDouble(3, product.getPrice());
 
             // Execute the INSERT statement — this will add the row to the database.
             stmt.executeUpdate();
 
         } catch (SQLException e) {
             // If something goes wrong (SQL error), print the stack trace to help debug.
-            System.out.println("Unable to add product");
-            //e.printStackTrace()
+            System.out.println("❌ Error adding product: " + e.getMessage());
         }
     }
 
     @Override
     public List<Product> getAll() {
+        // Create an empty list to hold the Film objects we will retrieve.
+        List<Product> products = new ArrayList<>();
 
-        return product;
+        // This is the SQL SELECT statement we will run.
+        String sql = "SELECT ProductID, ProductName, CategoryID, UnitPrice FROM products";
+
+        // This is a "try-with-resources" block.
+        // It ensures that the Connection, Statement, and ResultSet are closed automatically after we are done.
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            // Loop through each row in the ResultSet.
+            // Add the Product object to our list.
+            // Create a new Product object.
+            while (rs.next()) {
+                products.add(new Product(
+                        rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getInt("CategoryID"),
+                        rs.getDouble("UnitPrice")));
+            }
+
+        } catch (SQLException e) {
+            // If something goes wrong (SQL error), print the stack trace to help debug.
+            System.out.println("❌ Error fetching products: " + e.getMessage());
+        }
+
+        // Return the list of Film objects.
+        return products;
     }
 }

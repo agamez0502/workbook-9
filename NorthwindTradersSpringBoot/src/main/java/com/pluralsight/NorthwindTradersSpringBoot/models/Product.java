@@ -5,11 +5,11 @@ public class Product {
     // attributes
     private int productId;
     private String name;
-    private String categoryId;
+    private int categoryId;
     private double price;
 
     // constructor
-    public Product(int productId, String name, String categoryId, double price) {
+    public Product(int productId, String name, int categoryId, double price) {
         this.productId = productId;
         this.name = name;
         this.categoryId = categoryId;
@@ -33,11 +33,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
