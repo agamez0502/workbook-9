@@ -30,7 +30,7 @@ public class NorthwindApplication implements CommandLineRunner {
             System.out.println("\n🛍️ Product Manager Menu");
             System.out.println("1.) List Products");
             System.out.println("2.) Add Products");
-            System.out.println("0. Exit");
+            System.out.println("0.) Exit");
             System.out.print("👉 Choose an option: ");
             String choice = nwScanner.nextLine().trim();
 
@@ -41,13 +41,13 @@ public class NorthwindApplication implements CommandLineRunner {
                     List<Product> products = productDao.getAll();
 
                     // header
-                    System.out.println("\n🛒 List of Products");
-                    System.out.println("═".repeat(60));
-                    System.out.printf("%-5s %-30s %-10s %-10s\n", "ID", "Name", "Category", "Price");
-                    System.out.println("-".repeat(60));
+                    System.out.println("\n\uD83D\uDCE6 List of Products");
+                    System.out.println("═".repeat(70));
+                    System.out.printf("\uD83C\uDD94%-5s \uD83C\uDFF7\uFE0F%-35s \uD83E\uDDE9%-10s \uD83D\uDCB0%-10s\n", "ID", "Name", "Category", "Price");
+                    System.out.println("═".repeat(70));
 
                     for (Product p : products) {
-                        System.out.printf("%-5d %-30s %-10d $%-10.2f\n",
+                        System.out.printf("🔹%-5d %-40s %-10d $%-10.2f\n",
                                 p.getProductId(),
                                 p.getName(),
                                 p.getCategoryId(),
@@ -57,7 +57,7 @@ public class NorthwindApplication implements CommandLineRunner {
                 case "2":
 
                     // add a product
-                    System.out.print("🆕 Enter product name: ");
+                    System.out.print("\n🆕 Enter product name: ");
                     String name = nwScanner.nextLine();
 
                     System.out.print("🏷️ Enter category ID: ");
