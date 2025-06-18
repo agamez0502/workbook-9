@@ -50,4 +50,14 @@ public class SimpleFilmDao implements FilmDao {
         // Return the list of films.
         return films;
     }
+
+    @Override
+    public Film findById(int id) {
+        for (Film film : films) {
+            if (film.getFilmId() == id) {
+                return film;
+            }
+        }
+        return null;
+    }
 }

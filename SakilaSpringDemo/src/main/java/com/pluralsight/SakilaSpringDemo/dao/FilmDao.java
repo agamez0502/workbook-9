@@ -22,6 +22,7 @@ public interface FilmDao {
     // It returns a List<Film> — a list of Film objects.
     List<Film> getAll();
 
+    Film findById(int id);
     // NOTE:
     // Right now we are only adding 2 methods here.
     // Later we could add more methods to this interface, such as:

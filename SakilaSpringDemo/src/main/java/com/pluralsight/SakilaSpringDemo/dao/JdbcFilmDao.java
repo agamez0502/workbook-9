@@ -102,4 +102,49 @@ public class JdbcFilmDao implements FilmDao {
         // Return the list of Film objects.
         return films;
     }
+
+    @Override
+    public Film findById(int id) {
+        // Create an empty list to hold the Film objects we will retrieve.
+        List<Film> films = new ArrayList<>();
+
+        // This is the SQL SELECT statement we will run.
+        String sql = "SELECT film_id, title, rental_rate FROM films WHERE film_id = ?";
+
+        // This is a "try-with-resources" block.
+        // It ensures that the Connection, Statement, and ResultSet are closed automatically after we are done.
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // set parameters
+            stmt.setInt(1, id);
+
+            // execute query
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Loop through each row in the ResultSet.
+            while (rs.next()) {
+                // Create a new Film object.
+                Film film = new Film();
+
+                // Set the film's ID from the "film_id" column.
+                film.setFilmId(rs.getInt("film_id"));
+
+                // Set the film's title from the "title" column.
+                film.setTitle(rs.getString("title"));
+
+                // Set the film's rental rate from the "rental_rate" column.
+                film.setRentalRate(rs.getDouble("rental_rate"));
+
+                return film;
+            }
+
+        } catch (SQLException e) {
+            // If something goes wrong (SQL error), print the stack trace to help debug.
+            e.printStackTrace();
+        }
+
+        // if no film found or exception
+        return null;
+    }
 }
