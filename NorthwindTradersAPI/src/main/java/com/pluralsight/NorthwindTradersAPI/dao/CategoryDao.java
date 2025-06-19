@@ -14,4 +14,7 @@ public interface CategoryDao {
 
     // should allow users to add categories
     Category insert(Category category);
+
+    // should allow users to update categories
+    void update(int id, Category category);
 }

@@ -14,4 +14,7 @@ public interface ProductDao {
 
     // should allow users to add products
     Product insert(Product product);
+
+    // should allow users to update products
+    void update(int id, Product product);
 }

@@ -29,7 +29,7 @@ public class ProductsController {
     public Product getById(@PathVariable int id) {
         return productDao.getById(id);
     }
-    
+
     // should allow users to add products
     @PostMapping("/api/products")
     public Product insert(@RequestBody Product product) {

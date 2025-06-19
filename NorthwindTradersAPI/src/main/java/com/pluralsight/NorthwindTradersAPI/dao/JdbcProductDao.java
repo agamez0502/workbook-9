@@ -128,4 +128,10 @@ public class JdbcProductDao implements ProductDao {
             return null;
         }
     }
+
+    // should allow users to update products
+    @Override
+    public void update(int id, Product product) {
+
+    }
 }

@@ -122,4 +122,10 @@ public class JdbcCategoryDao implements CategoryDao {
             return null;
         }
     }
+
+    // should allow users to update categories
+    @Override
+    public void update(int id, Category category) {
+
+    }
 }
