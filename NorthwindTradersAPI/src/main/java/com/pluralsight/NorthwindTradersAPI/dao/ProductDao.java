@@ -11,4 +11,7 @@ public interface ProductDao {
 
     // should return a specific product
     Product getById(int id);
+
+    // should allow users to add products
+    Product insert(Product product);
 }

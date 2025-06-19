@@ -11,4 +11,7 @@ public interface CategoryDao {
 
     // should return a specific category
     Category getById(int id);
+
+    // should allow users to add categories
+    Category insert(Category category);
 }
