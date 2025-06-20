@@ -13,10 +13,10 @@ import java.util.List;
 public class JdbcCategoryDao implements CategoryDao {
 
     // DataSource that we will use to connect to the database
+    @Autowired
     private DataSource dataSource;
 
     // constructor
-    @Autowired
     public JdbcCategoryDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -114,7 +114,6 @@ public class JdbcCategoryDao implements CategoryDao {
             }
 
             return category;
-
 
         } catch (SQLException e) {
             // If something goes wrong (SQL error), print the stack trace to help debug.

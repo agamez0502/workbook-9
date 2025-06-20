@@ -2,6 +2,7 @@ package com.pluralsight.NorthwindTradersAPI.controllers;
 
 import com.pluralsight.NorthwindTradersAPI.dao.CategoryDao;
 import com.pluralsight.NorthwindTradersAPI.models.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class CategoriesController {
 
     // attributes
+    @Autowired
     private CategoryDao categoryDao;
 
     // constructor

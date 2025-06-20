@@ -1,9 +1,8 @@
 package com.pluralsight.NorthwindTradersAPI.controllers;
 
 import com.pluralsight.NorthwindTradersAPI.dao.ProductDao;
-import com.pluralsight.NorthwindTradersAPI.models.Category;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
-import org.springframework.aot.hint.annotation.RegisterReflection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 public class ProductsController {
 
     // attributes
+    @Autowired
     private ProductDao productDao;
 
     // constructor
