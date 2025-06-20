@@ -40,4 +40,10 @@ public class CategoriesController {
     public void update(@PathVariable int id, @RequestBody Category category) {
         categoryDao.update(id, category);
     }
+
+    // should allow users to delete categories
+    @DeleteMapping("/api/categories/{id}")
+    public void delete(@PathVariable int id) {
+        categoryDao.delete(id);
+    }
 }

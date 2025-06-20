@@ -17,4 +17,7 @@ public interface CategoryDao {
 
     // should allow users to update categories
     void update(int id, Category category);
+
+    // should allow users to delete categories
+    void delete(int id);
 }

@@ -146,4 +146,27 @@ public class JdbcCategoryDao implements CategoryDao {
             System.out.println("❌ Error updating category: " + e.getMessage());
         }
     }
+
+    // should allow users to delete categories
+    @Override
+    public void delete(int id) {
+
+        // this is a "try-with-resources" block
+        // it ensures that the Connection, Statement, and ResultSet are closed automatically after we are done
+        try (Connection conn = dataSource.getConnection();
+
+             // start prepared statement - tied to the open connection
+             PreparedStatement prepStatement = conn.prepareStatement("DELETE FROM categories WHERE CategoryID = ?")) {
+
+            // set parameters
+            prepStatement.setInt(1, id);
+
+            // execute the update to the query - deletes a row in the db
+            prepStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // If something goes wrong (SQL error), print the stack trace to help debug.
+            System.out.println("❌ Error deleting category: " + e.getMessage());
+        }
+    }
 }

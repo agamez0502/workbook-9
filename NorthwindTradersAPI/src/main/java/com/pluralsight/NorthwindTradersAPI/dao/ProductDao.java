@@ -17,4 +17,7 @@ public interface ProductDao {
 
     // should allow users to update products
     void update(int id, Product product);
+
+    // should allow users to delete products
+    void delete(int id);
 }

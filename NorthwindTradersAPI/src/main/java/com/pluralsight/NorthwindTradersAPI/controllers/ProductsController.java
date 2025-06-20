@@ -42,4 +42,10 @@ public class ProductsController {
     public void update(@PathVariable int id, @RequestBody Product product) {
         productDao.update(id, product);
     }
+
+    // should allow users to delete products
+    @DeleteMapping("/api/products/{id}")
+    public void delete(@PathVariable int id) {
+        productDao.delete(id);
+    }
 }
