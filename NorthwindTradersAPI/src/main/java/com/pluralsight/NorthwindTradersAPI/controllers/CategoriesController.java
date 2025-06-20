@@ -34,4 +34,10 @@ public class CategoriesController {
     public Category insert(@RequestBody Category category) {
         return categoryDao.insert(category);
     }
+
+    // should allow users to update categories
+    @PutMapping("/api/categories/{id}")
+    public void update(@PathVariable int id, @RequestBody Category category) {
+        categoryDao.update(id, category);
+    }
 }

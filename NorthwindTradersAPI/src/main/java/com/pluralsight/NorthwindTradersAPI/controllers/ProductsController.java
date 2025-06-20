@@ -3,6 +3,7 @@ package com.pluralsight.NorthwindTradersAPI.controllers;
 import com.pluralsight.NorthwindTradersAPI.dao.ProductDao;
 import com.pluralsight.NorthwindTradersAPI.models.Category;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
+import org.springframework.aot.hint.annotation.RegisterReflection;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class ProductsController {
     @PostMapping("/api/products")
     public Product insert(@RequestBody Product product) {
         return productDao.insert(product);
+    }
+
+    // should allow users to update products
+    @PutMapping("/api/products/{id}")
+    public void update(@PathVariable int id, @RequestBody Product product) {
+        productDao.update(id, product);
     }
 }

@@ -133,5 +133,25 @@ public class JdbcProductDao implements ProductDao {
     @Override
     public void update(int id, Product product) {
 
+        // this is a "try-with-resources" block
+        // it ensures that the Connection, Statement, and ResultSet are closed automatically after we are done
+        try (Connection conn = dataSource.getConnection();
+
+             // start prepared statement - tied to the open connection
+             PreparedStatement prepStatement = conn.prepareStatement("UPDATE products SET ProductName = ?, CategoryID = ?, UnitPrice = ? WHERE ProductID = ?")) {
+
+            // set parameters
+            prepStatement.setString(1, product.getProductName());
+            prepStatement.setInt(2, product.getCategoryId());
+            prepStatement.setDouble(3, product.getUnitPrice());
+            prepStatement.setInt(4, id);
+
+            // execute the update to the query - updates a row in the db
+            prepStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // If something goes wrong (SQL error), print the stack trace to help debug.
+            System.out.println("❌ Error updating product: " + e.getMessage());
+        }
     }
 }

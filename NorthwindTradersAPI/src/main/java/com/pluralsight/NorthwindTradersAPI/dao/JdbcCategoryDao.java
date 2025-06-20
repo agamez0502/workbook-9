@@ -127,5 +127,23 @@ public class JdbcCategoryDao implements CategoryDao {
     @Override
     public void update(int id, Category category) {
 
+        // this is a "try-with-resources" block
+        // it ensures that the Connection, Statement, and ResultSet are closed automatically after we are done
+        try (Connection conn = dataSource.getConnection();
+
+             // start prepared statement - tied to the open connection
+             PreparedStatement prepStatement = conn.prepareStatement("UPDATE categories SET CategoryName = ? WHERE CategoryID = ?")) {
+
+            // set parameters
+            prepStatement.setString(1, category.getCategoryName());
+            prepStatement.setInt(2, id);
+
+            // execute the update to the query - updates a row in the db
+            prepStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            // If something goes wrong (SQL error), print the stack trace to help debug.
+            System.out.println("❌ Error updating category: " + e.getMessage());
+        }
     }
 }
